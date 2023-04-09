@@ -15,15 +15,8 @@ const gameondom = (() =>{
         let cell = document.createElement("div");
         container.appendChild(cell).className = "grid-item";
         cell.innerText = gameboard.board[i][j];
-        cell.id = gameboard.board[i][j];
+        cell.id = `${i}-${j}`;
        }
-    // add event listener to each cell. when each cell is clicked, that player's marktype is given to the cell's relative position in the array
-    document.querySelectorAll('.grid-item').forEach(item =>{
-    item.addEventListener('click', event => {
-    item.innerText = playerOne.markType;
-    item.id = playerOne.markType
-        })
-    })
   };
 })();
 
@@ -31,10 +24,15 @@ const gameondom = (() =>{
 
 const player = (playerNumber, markType) => {
     const placeMark = () => {
+        //// add event listener to each cell. when each cell is clicked, that player's marktype is given to the cell's relative position in the array
         //the cell that the player clicks updates the player mark to the position in the gameboard
-        //let row = prompt(`player ${playerNumber}, which row`);
-        //let col = prompt(`player ${playerNumber}, which column`);
-        gameboard.board[i][j] = `${markType}`
+        document.querySelectorAll('.grid-item').forEach(item =>{
+        item.addEventListener('click', event => {
+        item.innerText = player.markType;
+        gameboard.board[item.id.charAt(0)][item.id.charAt(2)]= player.markType
+        console.log(gameboard.board)
+        })
+    })
         console.log(gameboard.board)};
     return { playerNumber, markType, placeMark };
 }
