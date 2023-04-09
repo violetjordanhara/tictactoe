@@ -1,0 +1,22 @@
+:root {
+    --grid-cols: 1;
+    --grid-rows: 1;
+  }
+  
+  #gameboard {
+    display: grid;
+    height:250px;
+    width:250px;
+   padding-left: 250px;
+   padding-right: 250px;
+    grid-gap: 0em;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+  }
+  
+  .grid-item {
+    padding: 0em;
+    border: 1px solid #000000;
+    text-align: center;
+    height: 100px;
+  }

@@ -1,13 +1,40 @@
 const gameboard = (() => {
-    const board = [[1, 2, 3],[4, 5, 6],[7, 8, 9]];
+    let board = [['o', 'x', 'o'],['x', 'o', 'x'],['o', 'x', 'o']];
     return{ board }
 })();
 
+const gameondom = (() =>{
+    //generate the game in DOM :)
+    const container = document.getElementById("gameboard");
+
+    container.style.setProperty('--grid-rows', 3);
+    container.style.setProperty('--grid-cols', 3);
+    //create cells 
+    for (let i = 0 ; i < 3 ; i++){
+       for (let j = 0; j < 3; j++){
+        let cell = document.createElement("div");
+        container.appendChild(cell).className = "grid-item";
+        cell.innerText = gameboard.board[i][j];
+        cell.id = gameboard.board[i][j];
+       }
+    // add event listener to each cell. when each cell is clicked, that player's marktype is given to the cell's relative position in the array
+    document.querySelectorAll('.grid-item').forEach(item =>{
+    item.addEventListener('click', event => {
+    item.innerText = playerOne.markType;
+    item.id = playerOne.markType
+        })
+    })
+  };
+})();
+
+
+
 const player = (playerNumber, markType) => {
     const placeMark = () => {
-        let row = prompt(`player ${playerNumber}, which row`);
-        let col = prompt(`player ${playerNumber}, which column`);
-        gameboard.board[row][col] = `${markType}`
+        //the cell that the player clicks updates the player mark to the position in the gameboard
+        //let row = prompt(`player ${playerNumber}, which row`);
+        //let col = prompt(`player ${playerNumber}, which column`);
+        gameboard.board[i][j] = `${markType}`
         console.log(gameboard.board)};
     return { playerNumber, markType, placeMark };
 }
