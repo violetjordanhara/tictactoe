@@ -48,8 +48,9 @@ const gameflow = (() => {
 
             turncounter ++;
 
-            changeCurrentPlayer();
             checkWin();
+            changeCurrentPlayer();
+            
         }
     }
 
@@ -62,19 +63,19 @@ const gameflow = (() => {
     }
 
     const checkWin = () => {
-        const allEqualX = arr => arr.every( v => v === player.markType );
-
         if (turncounter == 9){
         console.log('stop game; tie');
-        }else if (allEqualX( gameboard.board[0] || gameboard.board[1] || gameboard.board[2]) == true){
-        console.log(`${currentPlayer} wins`);
+        }else if ((gameboard.board[0][0] == gameboard.board[0][1] && gameboard.board[0][1] == gameboard.board[0][2] && gameboard.board[0][2] == currentPlayer.markType)||
+                (gameboard.board[1][0] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[1][2] && gameboard.board[1][2] == currentPlayer.markType)||
+                (gameboard.board[2][0] == gameboard.board[2][1] && gameboard.board[2][1] == gameboard.board[2][2] && gameboard.board[2][2] == currentPlayer.markType)){
+                console.log(`Player ${currentPlayer.playerNumber} wins`);
         }else if ((gameboard.board[0][0] == gameboard.board[1][0] && gameboard.board[1][0] == gameboard.board[2][0] && gameboard.board[2][0] == currentPlayer.markType)||
             (gameboard.board[0][1] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[2][1] && gameboard.board[2][1] == currentPlayer.markType)||
             (gameboard.board[0][2] == gameboard.board[1][2] && gameboard.board[1][2] == gameboard.board[2][2] && gameboard.board[2][2] == currentPlayer.markType)||
             (gameboard.board[0][0] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[2][2] && gameboard.board[2][2] == currentPlayer.markType)||
             (gameboard.board[0][2] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[2][0] && gameboard.board[2][0] == currentPlayer.markType)){
-        console.log(`${playerNumber} wins`);
-        }
+                console.log(`Player ${currentPlayer.playerNumber} wins`);
+            }
     }
     return {gotClickedWhere, changeCurrentPlayer, checkWin}
 })();
