@@ -4,8 +4,10 @@ const gameboard = (() => {
 })();
 
 const gameondom = (() =>{
-    //generate the game in DOM :)
+    //generate the game in DOM
+    const createboard = () => {
     const container = document.getElementById("gameboard");
+    container.replaceChildren();
 
     container.style.setProperty('--grid-rows', 3);
     container.style.setProperty('--grid-cols', 3);
@@ -25,10 +27,18 @@ const gameondom = (() =>{
         })
     })
   };
+};
+return { createboard }
 
-  const restart = document.getElementById("restart");
-  
 })();
+gameondom.createboard();
+
+const restart = (() => {
+    let restartbutton = document.getElementById("restart");
+    restartbutton.addEventListener("click", function(){
+        gameboard.board = [['', '', ''],['', '', ''],['', '', '']];
+        gameondom.createboard();
+})})();
 
 
 
