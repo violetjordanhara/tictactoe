@@ -25,16 +25,19 @@ const gameondom = (() =>{
         })
     })
   };
+
+  const restart = document.getElementById("restart");
+  
 })();
 
 
 
-const player = (playerNumber, markType) => {
-    return { playerNumber, markType};
+const player = (playerNumber, markType, name) => {
+    return { playerNumber, markType, name};
 }
 
-const playerOne = player('one', 'x');
-const playerTwo = player('two', 'o');
+const playerOne = player('one', 'x', prompt("what is the name of the first player?"));
+const playerTwo = player('two', 'o', prompt("what is the name of the second player?"));
 
 const gameflow = (() => {
     let listofplayers = [playerOne, playerTwo]
@@ -57,24 +60,29 @@ const gameflow = (() => {
     const changeCurrentPlayer = () => {
         if(currentPlayer == playerOne){
             currentPlayer = playerTwo;
+            document.getElementById("announcement").innerHTML= `It is ${currentPlayer.name}'s turn`
         }else{
             currentPlayer = playerOne;
+            document.getElementById("announcement").innerHTML= `It is ${currentPlayer.name}'s turn`
         }
     }
 
     const checkWin = () => {
         if (turncounter == 9){
         console.log('stop game; tie');
+        document.getElementById("announcement").innerHTML = "Game tied."
         }else if ((gameboard.board[0][0] == gameboard.board[0][1] && gameboard.board[0][1] == gameboard.board[0][2] && gameboard.board[0][2] == currentPlayer.markType)||
                 (gameboard.board[1][0] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[1][2] && gameboard.board[1][2] == currentPlayer.markType)||
                 (gameboard.board[2][0] == gameboard.board[2][1] && gameboard.board[2][1] == gameboard.board[2][2] && gameboard.board[2][2] == currentPlayer.markType)){
-                console.log(`Player ${currentPlayer.playerNumber} wins`);
+                console.log(`Player ${currentPlayer.playerNumber} wins, congratulations!`);
+                document.getElementById("announcement").innerHTML = `${currentPlayer.name} wins`
         }else if ((gameboard.board[0][0] == gameboard.board[1][0] && gameboard.board[1][0] == gameboard.board[2][0] && gameboard.board[2][0] == currentPlayer.markType)||
             (gameboard.board[0][1] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[2][1] && gameboard.board[2][1] == currentPlayer.markType)||
             (gameboard.board[0][2] == gameboard.board[1][2] && gameboard.board[1][2] == gameboard.board[2][2] && gameboard.board[2][2] == currentPlayer.markType)||
             (gameboard.board[0][0] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[2][2] && gameboard.board[2][2] == currentPlayer.markType)||
             (gameboard.board[0][2] == gameboard.board[1][1] && gameboard.board[1][1] == gameboard.board[2][0] && gameboard.board[2][0] == currentPlayer.markType)){
                 console.log(`Player ${currentPlayer.playerNumber} wins`);
+                document.getElementById("announcement").innerHTML = `${currentPlayer.name} wins, congratulations!`
             }
     }
     return {gotClickedWhere, changeCurrentPlayer, checkWin}
